@@ -21,7 +21,11 @@
 (add-to-list 'default-frame-alist '(font . "monospace 12"))
 
 (use-package doom-themes
-  :init (load-theme 'doom-tokyo-night t))
+  ;;:init (load-theme 'doom-tokyo-night t))
+  )
+
+(use-package catppuccin-theme
+  :init (load-theme 'catppuccin t))
 
 (use-package smart-mode-line
   :init
