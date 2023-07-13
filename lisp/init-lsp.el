@@ -14,7 +14,8 @@
   :hook ((lsp-mode . lsp-enable-which-key-integration)
 	 (c-mode . lsp-deferred))
   :commands (lsp lsp-deferred)
-  :init (setq lsp-keep-workspace-alive nil ;; Auto kill LSP server
+  :init (setq lsp-keymap-prefix "C-c l"
+              lsp-keep-workspace-alive nil ;; Auto kill LSP server
               lsp-enable-indentation nil
               lsp-enable-on-type-formatting nil
               lsp-auto-guess-root nil
