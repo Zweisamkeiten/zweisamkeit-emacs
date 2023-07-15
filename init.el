@@ -20,6 +20,7 @@
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-lsp)
+(require 'init-org)
 
 (when (file-exists-p custom-file)
   (load-file custom-file))
