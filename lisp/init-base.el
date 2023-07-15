@@ -17,6 +17,11 @@
 
 (setq gc-cons-threshold most-positive-fixnum)
 
+(setq make-backup-file nil)
+(setq auto-save-default nil)
+(setq backup-inhibited t)
+(setq backup-directory-alist `(("." . "~/.cache/.saves")))
+
 (provide 'init-base)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
