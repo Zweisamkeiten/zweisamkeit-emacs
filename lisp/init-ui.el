@@ -39,10 +39,11 @@
 
 (defun centaur-setup-fonts ()
   "Setup fonts."
+  (interactive)
   (when (display-graphic-p)
     ;; Set default font
     (cl-loop for font in '("monospace" "Cascadia Code" "Fira Code" "Jetbrains Mono"
-                           "SF Mono" "Hack" "Source Code Pro" "Menlo"
+                           "SF Mono" "Hack" "Menlo"
                            "Monaco" "DejaVu Sans Mono" "Consolas")
              when (font-installed-p font)
              return (set-face-attribute 'default nil
@@ -84,10 +85,14 @@
                       (setq face-font-rescale-alist `((,font . 1.0)))
                       (set-fontset-font t '(#x4e00 . #x9fff) (font-spec :family font))))))
 
-(centaur-setup-fonts)
-
 (use-package doom-themes
-  :init (load-theme 'doom-one t))
+  :init (load-theme 'doom-one t)
+  :config
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	doom-themes-enable-italic t) ; if nil, italics is universally disabled
+					;(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+					; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config))
 
 ;; (use-package catppuccin-theme
 ;;  :init (load-theme 'catppuccin t))
@@ -95,7 +100,7 @@
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode)
-  :init
+  :config
   (setq doom-modeline-icon t
         doom-modeline-height 1
         doom-modeline-window-width-limit 110
@@ -109,6 +114,7 @@
 ;; A minor-mode menu for mode-line
 (use-package minions
   :hook (doom-modeline-mode . minions-mode))
+
 ;; Fonts
 (defun centaur-install-fonts ()
   "Install necessary fonts."
@@ -164,6 +170,10 @@
     (message "Successfully %s `all-the-icons' and `Symbola' fonts to `%s'!"
              (if known-dest? "installed" "downloaded")
              font-dest)))
+
+(centaur-setup-fonts)
+(add-hook 'window-setup-hook #'centaur-setup-fonts)
+(add-hook 'server-after-make-frame-hook #'centaur-setup-fonts)
 
 ;; Icons
 ;; NOTE: Must run `M-x all-the-icons-install-fonts', and install fonts manually on Windows
